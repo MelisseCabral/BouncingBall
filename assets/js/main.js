@@ -6,7 +6,7 @@ var width = 800;
 var height = 600;
 
 /* 
-pega a largura da resolução da tela
+Get resolution of screen and setting size of canvas
     var width = screen.width * 0.85;
     var height = screen.height * 0.85;
 */
@@ -81,7 +81,7 @@ function increaseBallPosition(x, y){
             resetBall();
         } 
     }
-    if(ball.x >= width){
+    if(ball.x >= width - 15){
         if(ball.y > paddle2Y && ball.y < paddle2Y + PADDLE_HEIGHT){
             ball.speedX = - ball.speedX
             ball.speedY = - ball.speedY
