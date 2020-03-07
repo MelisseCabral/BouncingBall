@@ -2,6 +2,16 @@ var canvas;
 var canvasContext;
 var framesPerSecond = 30;
 
+var width = 800;
+var height = 600;
+
+/* 
+pega a largura da resolução da tela
+    var width = screen.width * 0.85;
+    var height = screen.height * 0.85;
+*/
+
+
 let ball = {
     x: 50,
     speedX: 7,
@@ -16,6 +26,8 @@ var paddle2Y = 250;
 window.onload = function(){
     
     canvas = document.getElementById("gameCanvas");
+    this.canvas.width = width;
+    this.canvas.height = this.height;
     canvasContext = canvas.getContext('2d');
 
     canvas.addEventListener('mousemove', e => {
@@ -38,7 +50,7 @@ function draw () {
     colorRect(0, 0, canvas.width, canvas.height, 'black');
 
     colorRect(5, paddle1Y, 10, PADDLE_HEIGHT, 'white');
-    colorRect(785, paddle2Y, 10, PADDLE_HEIGHT, 'white');
+    colorRect(width - 15, paddle2Y, 10, PADDLE_HEIGHT, 'white');
     colorArc(ball.x, ball.y, 10, 0, 'green')
     
 }
@@ -69,7 +81,7 @@ function increaseBallPosition(x, y){
             resetBall();
         } 
     }
-    if(ball.x >= 785){
+    if(ball.x >= width){
         if(ball.y > paddle2Y && ball.y < paddle2Y + PADDLE_HEIGHT){
             ball.speedX = - ball.speedX
             ball.speedY = - ball.speedY
@@ -87,7 +99,7 @@ function increaseBallPosition(x, y){
             resetBall();
         } 
     }
-    if(ball.y >= 600){
+    if(ball.y >= height){
         if(ball.y > paddle2Y && ball.y < paddle2Y + PADDLE_HEIGHT){
             ball.speedX = - ball.speedX
         } 
