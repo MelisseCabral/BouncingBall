@@ -13,13 +13,14 @@ Get resolution of screen and setting size of canvas
 
 
 let ball = {
-    x: 50,
-    speedX: 7,
-    y: 50,
-    speedY: 3,
+    x: 100,
+    speedX: 10,
+    y: 100,
+    speedY: 4,
 }
 
 const PADDLE_HEIGHT = 100;
+const PADDLE_WIDTH = 10;
 var paddle1Y = 250;
 var paddle2Y = 250;
 
@@ -50,7 +51,7 @@ function draw () {
     colorRect(0, 0, canvas.width, canvas.height, 'black');
 
     colorRect(5, paddle1Y, 10, PADDLE_HEIGHT, 'white');
-    colorRect(width - 15, paddle2Y, 10, PADDLE_HEIGHT, 'white');
+    colorRect(width - PADDLE_WIDTH - 5, paddle2Y, 10, PADDLE_HEIGHT, 'white');
     colorArc(ball.x, ball.y, 10, 0, 'green')
     
 }
@@ -66,46 +67,36 @@ function colorArc(leftX, topY, radius){
 }
 
 function increaseBallPosition(x, y){
+    
     let limitX = canvas.width - 10;
     let limitY = canvas.height - 10;
 
     ball.x = ball.x + ball.speedX;
     ball.y = ball.y + ball.speedY;
+
+    computerMove();
     
-    if(ball.x <= 15){
+    if(ball.x <= 20){
         if(ball.y > paddle1Y && ball.y < paddle1Y + PADDLE_HEIGHT){
-            ball.speedX = - ball.speedX
-            ball.speedY = - ball.speedY
+            ball.speedX = - ball.speedX;
         } 
          else {
-            resetBall();
+            resetGame();
         } 
     }
-    if(ball.x >= width - 15){
+    if(ball.x >= width - 20){
         if(ball.y > paddle2Y && ball.y < paddle2Y + PADDLE_HEIGHT){
-            ball.speedX = - ball.speedX
-            ball.speedY = - ball.speedY
+            ball.speedX = - ball.speedX;
         } 
          else {
-            resetBall();
+            resetGame();
         } 
     }
     if(ball.y <= 0){
-        if(ball.y > paddle1Y && ball.y < paddle1Y + PADDLE_HEIGHT){
-            ball.speedX = - ball.speedX
-            
-        } 
-         else {
-            resetBall();
-        } 
+        ball.speedY = - ball.speedY 
     }
     if(ball.y >= height){
-        if(ball.y > paddle2Y && ball.y < paddle2Y + PADDLE_HEIGHT){
-            ball.speedX = - ball.speedX
-        } 
-         else {
-            resetBall();
-        } 
+        ball.speedY = - ball.speedY
     }
     
 }
@@ -120,7 +111,30 @@ function calculateMousePosition(evt){
     }
 }
 
+function computerMove(){
+    var paddle1YCenter = paddle1Y + (PADDLE_HEIGHT)
+    if(paddle1YCenter < ball.y){
+        paddle1Y +=6;
+    } else {
+        paddle1Y -= 6;
+        
+    }
+}
+
 function resetBall(){
+    /*
     ball.x = canvas.width/2;
     ball.y = canvas.height/2;
+    */
+    ball = {
+        x: 100,
+        speedX: 10,
+        y: 100,
+        speedY: 4,
+    }
+}
+
+function resetGame(){
+    
+    resetBall();
 }
