@@ -25,7 +25,11 @@ var paddle1Y = 250;
 var paddle2Y = 250;
 
 window.onload = function(){
-    
+    this.startNewGame();
+}
+
+function startNewGame(){
+
     canvas = document.getElementById("gameCanvas");
     this.canvas.width = width;
     this.canvas.height = this.height;
@@ -40,7 +44,7 @@ window.onload = function(){
 
     draw();
     this.setInterval(this.draw, 1000/this.framesPerSecond);
-
+    
 }
 
 function draw () {
