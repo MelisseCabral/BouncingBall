@@ -35,8 +35,6 @@ window.onload = function(){
         var mousePos = calculateMousePosition(e);
         if(mousePos.x > 400){
             paddle2Y = mousePos.y - PADDLE_HEIGHT/2;
-        } else {
-            paddle1Y = mousePos.y - PADDLE_HEIGHT/2;
         }
     });
 
@@ -135,6 +133,12 @@ function resetBall(){
 }
 
 function resetGame(){
-    
     resetBall();
+}
+
+function overlayOn(){
+    document.getElementById("overlay").style.display = "block";
+}
+function overlayOff(){
+    document.getElementById("overlay").style.display = "block";
 }
