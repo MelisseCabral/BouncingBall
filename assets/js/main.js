@@ -13,9 +13,9 @@ Get resolution of screen and setting size of canvas
 
 
 let ball = {
-    x: 100,
+    x: 400,
     speedX: 10,
-    y: 100,
+    y: 300,
     speedY: 4,
 }
 
@@ -25,10 +25,12 @@ var paddle1Y = 250;
 var paddle2Y = 250;
 
 window.onload = function(){
-    this.startNewGame();
+    overlayOn();
 }
 
 function startNewGame(){
+
+    overlayOff();
 
     canvas = document.getElementById("gameCanvas");
     this.canvas.width = width;
@@ -37,9 +39,12 @@ function startNewGame(){
 
     canvas.addEventListener('mousemove', e => {
         var mousePos = calculateMousePosition(e);
-        if(mousePos.x > 400){
-            paddle2Y = mousePos.y - PADDLE_HEIGHT/2;
+        if(mousePos.y >= 0){
+            paddle2Y = mousePos.y;
+        } else{
+            paddle2Y = 0;
         }
+        
     });
 
     draw();
@@ -117,7 +122,7 @@ function computerMove(){
     var paddle1YCenter = paddle1Y + (PADDLE_HEIGHT)
     if(paddle1YCenter < ball.y){
         paddle1Y +=6;
-    } else {
+    } if (paddle1Y > ball.y){
         paddle1Y -= 6;
         
     }
@@ -141,8 +146,8 @@ function resetGame(){
 }
 
 function overlayOn(){
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("overlay").style.display = "flex";
 }
 function overlayOff(){
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("overlay").style.display = "none";
 }
